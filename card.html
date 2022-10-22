@@ -1,0 +1,181 @@
+<!Doctype html>
+<html>
+<style>
+    #div {
+        background: #F1A1A1;
+        background: -webkit-radial-gradient(bottom, #F1A1A1, #EE5349);
+        background: -moz-radial-gradient(bottom, #F1A1A1, #EE5349);
+        background: radial-gradient(to top, #F1A1A1, #EE5349);
+        width: 600px;
+        height: 500px;
+        display: block;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        margin-top: 10%;
+        border-radius: 15px;
+    }
+    img {
+        display: block;
+        position: fixed;
+        margin-top: 70px;
+        margin-left: 230px;
+        width: 240px;
+        height: 200px;
+    } 
+    #forma {
+        padding: 50px;
+        margin-left: 280px;
+    }
+    #cardinfo{
+        display: block;
+        position: fixed;
+        margin-left: 250px;
+        margin-top: 50px;
+        color: aliceblue;
+        z-index: 1;
+    }
+    #date{
+        position: absolute;
+        margin-left: 140px;
+        margin-top: -15px;
+    }
+    #dateinput{
+        position: absolute;
+        margin-top: 15px;
+        margin-left: 150px;
+    }
+    #cardnumber{
+        position:static;
+        margin-top: 70px;
+    }
+    #name{
+        position: absolute;
+        margin-top: 10px;
+    }
+    #mastercard{
+        margin-top: 30px;
+    }
+    h2{
+        color: aliceblue;
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    body{
+        background: #AF6060;
+        background: -webkit-radial-gradient(bottom, #AF6060, #A6150B);
+        background: -moz-radial-gradient(bottom, #AF6060, #A6150B);
+        background: radial-gradient(to top, #AF6060, #A6150B);
+    }
+    input {
+        width: 150px;
+        height: 20px;
+        background-color: transparent;
+        color: aliceblue;
+        border: solid transparent;
+        border-bottom: solid black;
+    }
+    input:focus {
+        width: 200px;
+        transition: 1.5s;
+        outline: none;
+        border-bottom: solid white;
+    }
+    button{
+        margin-left: 30px;
+        margin-top: 15px;
+        width: 100px;
+        height: 35px;
+        background-image: linear-gradient(to right, #e52d27 0%, #b31217  51%, #e52d27  100%);
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;            
+        border-radius: 5px;
+    }
+    button:hover {
+        background-position: right center; /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+    } 
+    #gold {
+        width: 35px;
+        height: 25px;
+        margin-top: 120px;
+        margin-left: 250px;
+        border-radius: 5px;
+    }
+</style>
+    <body>
+        <div id="cardinfo">
+            <h3 id="mastercard">Mastercard</h3>
+            <p id="cardnumber">0000000000000000</p>
+            <h4 id="date">Exp.date</h4>
+            <p id="dateinput">00/00</p>
+            <h4 id="name">Cardholder Name</h4>
+        </div>
+        <div id="card_front">
+            <img id="front_image" src="https://www.pngmart.com/files/22/Card-PNG-Isolated-Transparent.png">
+        </div>
+        <div id="div">
+            <form id="forma">
+                <h2>Cardholder Name</h2>
+                <input id="name_input" minlength="4" maxlength="20" onkeyup="promjena('name_input', 'name')" type="name" placeholder="name" >
+                <h2>Card Number</h2>
+                <input id="poljeValidacija" type="text" minlength="16" maxlength="16" onkeyup = "validacija('poljeValidacija'); promjena('poljeValidacija', 'cardnumber')" placeholder="card number">
+                <h2>Exp.date [MM/YY]</h2>
+                <input id="month"  type="text" minlength="4" maxlength="4" onkeyup="promjena('month', 'dateinput')" placeholder="Exp. date"> <h2>CVC</h2> <input id="kali" onkeyup = "validacija('kali')" type="text" minlength="3" maxlength="3">
+                <br>
+                <button  onclick="validateinfo('value')">Done</button>
+            </form>
+        </div>
+    </body>
+</html>
+<script>
+    function validacija(field_id) {
+        var poljeValidacija = document.getElementById(field_id).value;
+        console.log(poljeValidacija);
+        if (isNaN(poljeValidacija)){
+            document.getElementById(field_id).value = "";
+            console.log(document.getElementById('kali'));
+            
+            
+        }
+        else {
+            // document.getElementById('kali').value = poljeValidacija;
+        }
+    }
+    function promjena(field_id, text_value)
+    {
+        var text = document.getElementById(field_id).value ;
+        document.getElementById(text_value).innerHTML = text ;
+        
+        }
+    function validateinfo(value) {
+        // var a = document.getElementById("name_input").value;
+        // var b = document.getElementById("poljeValidacija").value;
+        // var c = document.getElementById("month").value;
+        // var d = document.getElementById("kali").value;
+        
+        // if (a || b || c || d === ""){
+        //    window.alert("Error");
+        //    return false; 
+        //}
+        var div_to_check = document.getElementById("div");
+        var formElements = div_to_check.querySelectorAll("input");
+        var show_alert = false;
+
+        console.log(formElements);
+
+        for(index = 0; index < formElements.length; index++) {
+            console.log(formElements[index]); 
+            if(formElements[index].value == ''){
+                show_alert = true;
+            }
+        }
+
+        if(show_alert == true) {
+            window.alert("Polje ne moze biti prazno.");
+        }
+    }
+</script>
